@@ -1,0 +1,83 @@
+@extends('admin.layout.app')
+@section('content')
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <!-- start page title -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box">
+                        <div class="page-title-right">
+                            <ol class="breadcrumb m-0">
+
+                                <li class="breadcrumb-item active">Edit SubCategory</li>
+                            </ol>
+                        </div>
+                        <h4 class="page-title">Edit SubCategory</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <!-- Form row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <form id="myForm" method="post" action="{{ route('subcategory-update') }}">
+                                @csrf
+                                <input type="hidden" name="id" value="{{ $data->id }}">
+
+                                <div class="row">
+                                    <div class="form-group col-md-6 mb-3">
+                                        <label for="inputEmail4" class="form-label">Category Name </label>
+                                        <select name="category_id" class="form-select" id="example-select">
+                                            <option> Select One Category </option>
+                                            @foreach ($categories as $category)
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}"
+                                                        {{ $category->id == $data->category_id ? 'selected' : '' }}>
+                                                        {{ $category->name }}</option>
+                                                @endforeach
+                                            @endforeach
+                                        </select>
+                                        @error('category_id')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6 mb-3">
+                                        <label for="inputEmail4" class="form-label">SubCategory Name </label>
+                                        <input type="text" name="name" class="form-control" id="inputEmail4"
+                                            placeholder="Add SubCategory" value="{{ $data->name }}">
+                                        @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                </div>
+
+
+
+                                <button type="submit" class="btn btn-primary waves-effect waves-light">Update</button>
+
+                            </form>
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card-->
+                </div> <!-- end col -->
+            </div>
+            <!-- end row -->
+
+
+
+        </div> <!-- container -->
+
+    </div> <!-- content -->
+@endsection
